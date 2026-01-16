@@ -1,5 +1,6 @@
 # VS Code
 .vscode/
+*.code-workspace
 
 # Python
 __pycache__/
@@ -10,15 +11,32 @@ __pycache__/
 env/
 venv/
 .venv
+.env
 *.egg-info/
 dist/
 build/
+*.pip
 
 # IDE
 .idea/
 *.swp
 *.swo
+*.sublime-workspace
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Models and data (optional)
+*.pkl
+*.joblib
+*.h5
+
+# Temporary files
+*.tmp
+*.bak
+*~

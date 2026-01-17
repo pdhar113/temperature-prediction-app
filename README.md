@@ -1,25 +1,24 @@
-# ML Lab: Temperature Prediction
+# Temperature Prediction
 
 A machine learning application that predicts temperature based on Air Quality Index (AQI) and Humidity levels using Linear Regression.
 
-## Project Overview
+## About
 
 This project demonstrates a complete ML pipeline from data preprocessing, model training, and evaluation to a Flask-based web application for making predictions.
 
-**Model Performance:**
-- R² Score: 0.70 (70% confidence level)
-- Algorithm: Linear Regression
-- Features: AQI, Humidity
-- Target: Temperature
+**Model Specifications:**
+- **Algorithm:** Linear Regression
+- **Features:** AQI, Humidity
+- **Target:** Temperature
+- **R² Score:** 0.70 (70% confidence level)
 
 ## Project Structure
 
 ```
-ml_lab/
+temp-predictor-app/
 ├── app.py                              # Flask web application
 ├── train_model.py                      # Model training script
 ├── test_model.py                       # Model testing/evaluation
-├── temperature_lr_model.pkl            # Trained model (generated)
 ├── data/
 │   ├── aqi_temp_humidity_normal_highcorr.csv   # Original dataset
 │   ├── train_data.csv                  # 70% training data (generated)
@@ -27,27 +26,29 @@ ml_lab/
 ├── templates/
 │   ├── index.html                      # Input form page
 │   └── result.html                     # Prediction results page
-└── README.md                           # This file
+├── README.md                           # This file
+└── requirements.txt                    # Python dependencies
 ```
 
-## Installation
+## Prerequisites
 
-### Prerequisites
 - Python 3.8 or higher
 - pip (Python package manager)
 
-### Setup
+## Installation
 
-1. **Clone/Navigate to the project directory:**
+1. **Navigate to the project directory:**
    ```bash
-   cd ml_lab
+   cd temp-predictor-app
    ```
 
-2. **Create a virtual environment (optional but recommended):**
+2. **Create and activate a virtual environment (recommended):**
    ```bash
-   python -m venv .venv
-   .venv\Scripts\activate  # On Windows
-   source .venv/bin/activate  # On macOS/Linux
+   python -m venv venv
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
    ```
 
 3. **Install required packages:**
@@ -62,22 +63,22 @@ ml_lab/
 
 ## Usage
 
-### 1. Train the Model
+### Training the Model
 
-First, generate the training and test datasets, and train the model:
+Generate training and test datasets, and train the model:
 
 ```bash
 python train_model.py
 ```
 
-This will:
-- Load the original dataset
-- Split data into 70% training and 30% testing
+This script will:
+- Load the original dataset from `data/aqi_temp_humidity_normal_highcorr.csv`
+- Split data into 70% training and 30% testing sets
 - Save split data to `data/train_data.csv` and `data/test_data.csv`
 - Train a Linear Regression model
-- Save the model as `temperature_lr_model.pkl`
+- Save the trained model as `temperature_lr_model.pkl`
 
-### 2. Test the Model
+### Testing the Model
 
 Evaluate the trained model's performance:
 
@@ -85,7 +86,7 @@ Evaluate the trained model's performance:
 python test_model.py
 ```
 
-### 3. Run the Web Application
+### Running the Web Application
 
 Start the Flask development server:
 
@@ -93,61 +94,60 @@ Start the Flask development server:
 python app.py
 ```
 
-Then open your browser and navigate to:
+Open your browser and navigate to:
 ```
 http://localhost:5000
 ```
 
 **Using the Application:**
-1. Enter AQI value (Air Quality Index)
-2. Enter Humidity percentage
-3. Click "Predict" to get the predicted temperature
-4. The result will display the predicted temperature and model confidence level
+1. Enter the AQI (Air Quality Index) value
+2. Enter the Humidity percentage
+3. Click "Predict" to generate a temperature prediction
+4. View the predicted temperature and model confidence level on the results page
 
 ## Dependencies
 
 - **pandas** - Data manipulation and CSV file handling
 - **scikit-learn** - Machine learning algorithms and model evaluation
-- **joblib** - Model serialization
-- **flask** - Web framework
+- **joblib** - Model serialization and persistence
+- **flask** - Web framework for the application
 - **numpy** - Numerical computations
 
-## Model Details
+## Model Information
 
-### Algorithm: Linear Regression
+### Algorithm
 
-The model uses Linear Regression to establish a linear relationship between input features (AQI, Humidity) and the target variable (Temperature).
+Linear Regression is used to establish a linear relationship between input features and the target temperature variable.
 
 ### Features
+
 - **AQI (Air Quality Index):** Numerical value representing air pollution level
-- **Humidity:** Percentage of humidity in the environment
+- **Humidity:** Percentage of atmospheric humidity
 
-### Target
-- **Temperature:** Predicted temperature value in appropriate units
+### Target Variable
 
-### Data Split
-- Training Set: 70% of data
-- Test Set: 30% of data
-- Random State: 42 (for reproducibility)
+- **Temperature:** Predicted environmental temperature
 
-## Notes
+### Data Specifications
 
-- The model confidence level is fixed at 70% (the R² score from training)
-- Ensure the `temperature_lr_model.pkl` file exists before running the Flask app
-- The Flask app runs in debug mode by default (suitable for development only)
+- **Training Set:** 70% of data (random split)
+- **Test Set:** 30% of data
+- **Random State:** 42 (ensures reproducibility)
+
+## Important Notes
+
+- The model must be trained before running the Flask application (requires `temperature_lr_model.pkl`)
+- The Flask app runs in debug mode by default (development only)
+- Model confidence is fixed at 70% (R² score from training)
+- Ensure the `requirements.txt` file contains all dependencies
 
 ## Future Enhancements
 
-- Add more features (e.g., wind speed, precipitation)
-- Implement more sophisticated models (Random Forest, Neural Networks)
-- Add model retraining capabilities via the web interface
-- Deploy to production server
-- Add data validation and error handling
-
-## Author
-
-ML Lab Project
-
-## License
-
-MIT License
+- Expand features (wind speed, precipitation, pressure, etc.)
+- Implement advanced models (Random Forest, Neural Networks, XGBoost)
+- Add real-time model retraining via web interface
+- Production deployment with WSGI server
+- Enhanced data validation and error handling
+- Unit tests and integration tests
+- API documentation with Swagger/OpenAPI
+- Model versioning and tracking
